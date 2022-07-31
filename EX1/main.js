@@ -3,7 +3,21 @@ var vm = new Vue({
     data: {
         title: 'vippro',
         url: 'https://www.facebook.com/',
-        counter: 0
+        counter: 0,
+        students: [
+            {
+                id: 1,
+                name: "mta"
+            },
+            {
+                id: 2,
+                name: "mta1"
+            },
+            {
+                id: 3,
+                name: "mta2"
+            }
+        ]
     },
     methods: {
         say: function (params) {

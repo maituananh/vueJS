@@ -15,6 +15,12 @@
         <a v-bind:href="url" target="_blank">facebook</a>
         <button v-on:click="tang()"> button {{counter}}</button>
         <input v-model="title" value="v-model"/>
+
+        <h1> LIST STUDENT </h1>
+        <ul v-for="student in students">
+            <li> {{student.id}} </li>
+            <li> {{student.name}} </li>
+        </ul>
     </div>
 </body>
     <script src="main.js"></script>
