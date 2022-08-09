@@ -1,9 +1,9 @@
 <template>
   <div class="Dice d-flex flex-column">
-    <img class="shadow" src="../assets/image/dice-1.png"/>
-    <img class="shadow" src="../assets/image/dice-1.png"/>
-    {{ diceScore.dice1 }}
-    {{ diceScore.dice2 }}
+    <img class="shadow" v-bind:src="url + (diceScore.dice1 == 0 ? 1 : diceScore.dice1) + extension"/>
+    <img class="shadow" v-bind:src="url + (diceScore.dice2 == 0 ? 1 : diceScore.dice2) + extension"/>
+<!--    {{ diceScore.dice1 }}-->
+<!--    {{ diceScore.dice2 }}-->
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
   name: "Dice",
   data: function () {
     return {
-      url: "../assets/image/dice-",
+      url: "/static/image/dice-",
       extension: ".png",
     }
   },

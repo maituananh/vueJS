@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="border-0">
+    <button class="border-0" v-on:click="newGame">
       NEW GAME
     </button>
   </div>
@@ -8,7 +8,12 @@
 
 <script>
 export default {
-  name: "NewGame"
+  name: "NewGame",
+  methods: {
+    newGame() {
+      this.$emit("newGame");
+    }
+  }
 }
 </script>
 

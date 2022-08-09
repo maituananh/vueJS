@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <newGame/>
+    <newGame v-on:newGame="newGame"/>
     <div class="d-flex justify-content-around align-items-center">
       <div>
         <displayScore>
           <div class="player">
-            <p>PLAYER 1</p>
+            <p>PLAYER 1 </p>
           </div>
 
           <div class="score">
@@ -108,16 +108,17 @@ export default {
       this.diceScore = diceScore;
       let sum = diceScore.dice1 + diceScore.dice2;
 
-      if (diceScore.dice1 === 1 || diceScore.dice1 === 2) {
+      if (diceScore.dice1 === 1 || diceScore.dice2 === 1) {
         if (this.holdScore.flag === 1) {
           this.$set(this.totalScore, 'player1', 0);
+          this.$set(this.holdScore, 'player1', 0);
           this.holdScore.flag = 2;
         } else {
           this.$set(this.totalScore, 'player2', 0);
+          this.$set(this.holdScore, 'player2', 0);
           this.holdScore.flag = 1;
         }
-        // this.diceScore.dice1 = 0;
-        // this.diceScore.dice2 = 0;
+        sum = 0;
       }
 
       if (this.holdScore.flag === 1) {
@@ -129,17 +130,25 @@ export default {
       console.log(diceScore.dice1, diceScore.dice2);
     },
     holdScoreF() {
-      if (this.diceScore.dice1 + this.diceScore.dice2 === 0) {
-        alert("please click button roll dice")
+      if (this.diceScore.dice1 !== 0 || this.diceScore.dice2 !== 0) {
+        if (this.holdScore.flag === 1) {
+          this.$set(this.totalScore, 'player1', this.totalScore.player1 + this.holdScore.player1);
+          this.$set(this.holdScore, 'player1', 0);
+          this.holdScore.flag = 2;
+        } else {
+          this.$set(this.totalScore, 'player2', this.totalScore.player2 + this.holdScore.player2);
+          this.$set(this.holdScore, 'player2', 0);
+          this.holdScore.flag = 1;
+        }
       }
-
-      if (this.holdScore.flag === 1) {
-        this.$set(this.totalScore, 'player1', this.totalScore.player1 + this.holdScore.player1);
-        this.holdScore.flag = 2;
-      } else {
-        this.$set(this.totalScore, 'player2', this.totalScore.player2 + this.holdScore.player2);
-        this.holdScore.flag = 1;
-      }
+    },
+    newGame() {
+      this.$set(this.totalScore, 'player1', 0);
+      this.$set(this.holdScore, 'player1', 0);
+      this.$set(this.totalScore, 'player2', 0);
+      this.$set(this.holdScore, 'player2', 0);
+      this.$set(this.diceScore, 'dice1', 0);
+      this.$set(this.diceScore, 'dice2', 0);
     }
   },
   computed: {},
@@ -162,7 +171,6 @@ export default {
   color: #42b983;
   background-color: white;
 }
-
 
 .roll-dice {
   margin-bottom: 30px;
